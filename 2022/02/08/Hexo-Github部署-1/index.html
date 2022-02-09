@@ -13,7 +13,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="linyi">
   <meta name="keywords" content="">
   
     <meta name="description" content="部署需要的工具(nodejs、git、hexo) nodejs脚本，需要利用npm安装，或者用国内的淘宝镜像用cnpm安装，nodejs安装教程 原地址和淘宝镜像地址转换方法：   npm转换到cnpm  1、 切换淘宝源npm config set registry https:&#x2F;&#x2F;registry.npm.taobao.org --g  2、 验证配置npm config get regis">
@@ -24,8 +24,9 @@
 <meta property="og:description" content="部署需要的工具(nodejs、git、hexo) nodejs脚本，需要利用npm安装，或者用国内的淘宝镜像用cnpm安装，nodejs安装教程 原地址和淘宝镜像地址转换方法：   npm转换到cnpm  1、 切换淘宝源npm config set registry https:&#x2F;&#x2F;registry.npm.taobao.org --g  2、 验证配置npm config get regis">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-02-08T02:51:00.000Z">
-<meta property="article:modified_time" content="2022-02-08T06:11:26.341Z">
+<meta property="article:modified_time" content="2022-02-09T11:29:08.359Z">
 <meta property="article:author" content="LinYi Nie">
+<meta property="article:tag" content="hexo博客">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -208,7 +209,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          undefined 字
+          1.4k 字
         
       </span>
     
@@ -219,7 +220,7 @@
         
         
         
-          NaN 分钟
+          12 分钟
         
       </span>
     
@@ -278,7 +279,7 @@
 <li>搭建Github仓库<br> 进入github的repositry，新建一个仓库，命名方式<code>用户名/用户名.github,io</code>，可勾选Add a README file。</li>
 <li>生成ssh keys<br> 随便找一个文件夹，右键打开Bash here，输入ssh查看，默认安装了ssh，输入<code>ssh-keygen -t rsa -C &quot;邮箱地址&quot;</code>，会在<code>C://Users/用户名/.ssh/</code>，打开id_rsa.pub，复制内容，然后打开Github的setting,点击SSH，new SSH key,tittle自己取，将刚才复制的内容粘贴到Key中，点击Add。<br> 检测ssh是否绑定成功:<code>ssh -T git@guthub.com</code>,输入yes，出现<code>hi 你的用户名,you have successfully...</code>即成功， </li>
 <li>生成本地的博客内容<br> 创建一个文件夹，用于存放博客内容，在开始菜单找到Git Bash以管理员身份运行，进入文件夹，<code>npm install -g hexo</code>安装hexo，然后输入<code>hexo init</code>初始化hexo,出现Starting Blogging with hexo即可。之后<code>hexo s</code>静态生成本地博客页面。</li>
-<li>发布博客到Github上<br> 将存放博客的文件夹中的_config.yml编辑，在最后一行将deploy修改， <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: 你创建的Github上的仓库地址</span><br><span class="line">  branch: main</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+<li>发布博客到Github上<br> 将存放博客的文件夹中的_config.yml编辑，在最后一行将deploy修改， <figure class="highlight dts"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">deploy:</span><br><span class="hljs-symbol">  type:</span> git<br><span class="hljs-symbol">  repository:</span> 你创建的Github上的仓库地址<br><span class="hljs-symbol">  branch:</span> main<br>    <br></code></pre></td></tr></table></figure>
 然后在打开Git bash进入博客文件夹，添加部署依赖<code>npm install hexo-deployer-git --save</code>，输入<code>hexo g</code>生成页面，输入<code>hexo d</code>上传，期间会进行Github账号密码的验证，在输入密码的时候，可以在Github创建令牌授权，然后输入即可。最后通过仓库网址访问博客网站<code>你的仓库名.github.io</code>。<br>这样hexo的博客网站就初步建立好了，美化插件可以在网上找到。</li>
 </ol>
 
@@ -288,6 +289,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/hexo%E5%8D%9A%E5%AE%A2/">#hexo博客</a>
+      
+    </div>
   
 </div>
 
@@ -304,7 +333,7 @@
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>John Doe</div>
+          <div>linyi</div>
         </div>
       
       
