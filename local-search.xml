@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>轮转数组</title>
+    <link href="/2022/02/10/%E8%BD%AE%E8%BD%AC%E6%95%B0%E7%BB%84/"/>
+    <url>/2022/02/10/%E8%BD%AE%E8%BD%AC%E6%95%B0%E7%BB%84/</url>
+    
+    <content type="html"><![CDATA[<p>题目：给你一个数组，将数组中的元素向右轮转 k 个位置，其中 k 是非负数。</p><ul><li>方法一：使用额外的数组</li></ul><figure class="highlight java"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">rotate</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">int</span>[] newArr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;<br>            newArr[(i + k) % n] = nums[i];<br>        &#125;<br>        System.arraycopy(newArr, <span class="hljs-number">0</span>, nums, <span class="hljs-number">0</span>, n);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>该方法比较简单直白，时间复杂度为O(n)，空间复杂度为O(n)。</p><ul><li>方法二：环状替换<br>解析：通过常数变量来储存即将被发生替换的值，从位置 0 开始，最初令 temp&#x3D;nums[0]。根据规则，位置 0 的元素会放至 (0+k)\mod n 的位置，令 x&#x3D;(0+k)mod n，此时交换 temp 和 nums[x]，完成位置 x 的更新。然后，我们考察位置 x，并交换 temp 和 nums[(x+k)mod n]，从而完成下一个位置的更新。不断进行上述过程，直至回到初始位置 0。<br>从0出去到回来可能存在有些位置未被访问，所以要加1，从1有开始替换，那么不可能一直循环到最后一个数，这样很明显有些位置重复访问了，循环的圈数就是难点。</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">rotate</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        k = k % n;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> gcd(k, n);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; start &lt; count; ++start) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">current</span> <span class="hljs-operator">=</span> start;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">prev</span> <span class="hljs-operator">=</span> nums[start];<br>            <span class="hljs-keyword">do</span> &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> (current + k) % n;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> nums[next];<br>                nums[next] = prev;<br>                prev = temp;<br>                current = next;<br>            &#125; <span class="hljs-keyword">while</span> (start != current);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">gcd</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> &#123;<br>        <span class="hljs-keyword">return</span> y &gt; <span class="hljs-number">0</span> ? gcd(y, x % y) : x;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>时间复杂度为O(n)，空间复杂度为O(1);</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>算法题</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>轮转数组</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>双指针</title>
     <link href="/2022/02/10/%E5%8F%8C%E6%8C%87%E9%92%88/"/>
     <url>/2022/02/10/%E5%8F%8C%E6%8C%87%E9%92%88/</url>
@@ -13,7 +38,7 @@
     
     <categories>
       
-      <category>算法</category>
+      <category>算法题</category>
       
     </categories>
     
